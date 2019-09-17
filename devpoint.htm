@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href ="devpoint.css" rel= "stylesheet"/>
+    <title>Document</title>
+</head>
+<body>
+    <div class="all">
+        <div class="contender">
+        <div class="images">
+            <img src="Logo.png" alt="devpoint" width="120px" height="40px" class="top-margin first"/>
+            <img src="Team-illus.svg" alt ="team illustration"  class="second-image top-margin" />
+            <blockquote class="top-margin"><em><b>"Alone we can do so little; 
+                together we can do so much"</b></em>
+                    <legend>-<em><b> Helen Keller</b></em></legend></blockquote>
+              
+        </div>
+        <div class="form-area">
+            <h2>Welcome to <b>Devpoint HNG</b></h2>
+            <p>New to devpoint? create an account 
+                and be on the path of creating history</p>
+                <form>
+                    <div>
+                    <label for="fullname">Full Name: </label>
+                    <input type="text" 
+                    name="fullname" id ="fname" oninput="nameTwo()" placeholder="Enter your surname first"/>
+                    <small><p id="valid1"></p></small>
+                </div>
+                <div>
+                    <label for="email">E-mail: </label>
+                    <input type="email" 
+                    name="email" id ="email" oninput="emailPart()" placeholder="Enter your E-mail"/>
+                    <small><p id="valid2"></p></small>
+                </div>
+                <div>
+                    <label for="password">Password: </label>
+                    <input type="password" 
+                    name="password" id = "pswrd" oninput="passWord()" placeholder="Enter your password"/>
+                    <small><p id="valid3"></p></small>
+                </div>
+                <div class ="inline">
+                 <input type="checkbox" class="checkbox"/>
+                 <small class="tandc">By signing I agree to
+                     <a href ="#">Terms and Conditions</a></small>
+                </div>
+                <div>
+                    <input type = "submit" class="submit" value="Sign Up"/>
+                </div>
+                <div>
+                    <small class="tandc">Already have an account? <a href="#">Sign in here</a></small>
+                </div>
+                </form>
+        </div>
+        </div>
+    </div>
+    <script>
+        function nameTwo(){
+                let fname = document.querySelector("#fname").value;
+                let fpattern =     /^([a-zA-Z]{2,}) ([a-zA-Z]{2,})$/;
+
+                    if(fpattern.test(String(fname).toUpperCase())  == true && !fname.length < 4   ){
+                        ftext = "Valid input";
+                    } else {
+                        ftext = "Input not valid";
+                    }
+                
+                   document.getElementById("valid1").innerHTML = ftext;
+
+            }
+            function emailPart(){
+                let name = document.querySelector("#email").value;
+                let valid = document.querySelector("#valid2");
+                let pattern =/\S+@\S+/;
+
+                    if(pattern.test(String(name).toLowerCase()) == true){
+                        text = "Valid input";
+                    } else {
+                        text = "Add a valid email";
+                    }
+                
+                   document.getElementById("valid2").innerHTML = text;
+                }
+                function passWord(){
+                let tname = document.querySelector("#pswrd").value;
+                let tpattern =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,10}$/;
+              
+
+                    if(tpattern.test(String(tname))  == true  ){
+                        ttext = "Valid input";
+                    } else {
+                        ttext = "Must include at least one uppercase, 5 lowercase and a number";
+                    }
+                
+                   document.getElementById("valid3").innerHTML = ttext;
+
+            }
+
+    </script>
+</body>
+</html>
