@@ -1,3 +1,16 @@
+<?php 
+session_start();
+
+include"controller_dependency.php";
+
+//instantiate controller class and select apprioprate class
+ $obj = factory::RegisterController();
+ 
+$token = $_SESSION['token'] = md5(rand(1,10000000));
+
+if(!isset($_SESSION['ID'])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href ="css/devpoint.css" rel= "stylesheet"/>
-    <title>Document</title>
+    <title>Signup</title>
 </head>
 <body>
     <div class="all">
@@ -23,6 +36,60 @@
             <p>New to devpoint? create an account 
                 and be on the path of creating history</p>
 
+
+                <!----- START PHP CODE ----->
+
+              <?php
+
+if(isset($_POST['user_signup']))
+    {
+   if($_SERVER['REQUEST_METHOD'] == "POST")
+   {
+        if((isset($_POST['email'])) && (isset($_POST['password'])) && ($_POST['email'] != null) && ($_POST['password'] != null) && (isset($_POST['firstname'])) && (isset($_POST['middlename'])) && ($_POST['firstname'] != null) && ($_POST['middlename'] != null) && (isset($_POST['lastname'])) && (isset($_POST['passwordConfirm'])) && ($_POST['lastname'] != null) && ($_POST['passwordConfirm'] != null) && (isset($_POST['terms'])) && ($_POST['terms'] != null))
+        {
+            if(($token == $_SESSION['token']) && ($_POST['passwordConfirm'] === $_POST['password']))
+            {
+
+                    //CALL UP REGISTER FUNCTION
+                $obj->Register($_POST['firstname'],$_POST['lastname'],$_POST['middlename'],$_POST['email'],$_POST['password']);
+        
+            }
+            else{
+                echo'<p style="color: red;">Error!</p>';
+                echo"<script> var email_var = setInterval(function(){generate_alert('Registration not successful, password missmatch!', 'info', 'red');}, 1000); 
+                setTimeout(function(){cancel_timed_alert('info', email_var);}, 10000);</script>";
+            }
+
+        }
+        else{
+                if(!isset($_POST['terms']))
+                {
+                    echo'<p style="color: red;">Error!</p>';
+                    echo"<script> var email_var = setInterval(function(){generate_alert('Registration not successful check your inputs and accept terms and conditions.', 'info', 'red');}, 1000); 
+                    setTimeout(function(){cancel_timed_alert('info', email_var);}, 10000);</script>";
+                }
+                else
+                {
+                    echo'<p style="color: red;">Error!</p>';
+                    echo"<script> var email_var = setInterval(function(){generate_alert('Registration not successful check your inputs', 'info', 'red');}, 1000); 
+                    setTimeout(function(){cancel_timed_alert('info', email_var);}, 10000);</script>";
+                }
+                
+            }
+
+    }
+    else{
+        echo'<p style="color: red;">Error!</p>';
+        echo"<script> var email_var = setInterval(function(){generate_alert('Registration not successful', 'info', 'red');}, 1000); 
+        setTimeout(function(){cancel_timed_alert('info', email_var);}, 10000);</script>";
+    }
+
+}
+
+    ?>
+
+      <!----- END PHP CODE ----->
+
                   <!--- ALERTS --->
                   <h4><i style="color: #44E615; text-align: center; background-color: #EAF9EA;"><strong id="success"></strong></i></h4>
                   <h4><i style="color: #1BCEDA; text-align: center; background-color: #EAF9EA;"><strong id="info"></strong></i></h4>
@@ -31,8 +98,9 @@
                   <h4><i style="color: #DA381B; text-align: center; background-color: #EAF9EA;"><strong id="failure"></strong></i></h4>
                   <!--- ALERTS --->
 
-
-                <form>
+                   
+                  
+                  <form action="" method="POST">
                     <div>
                     <label for="firstname">First Name: </label>
                     <input type="text" 
@@ -75,18 +143,17 @@
                      <a href ="#">Terms and Conditions</a></small>
                 </div>
                 <div>
-                    <input type = "submit" class="submit" value="Sign Up"/>
+                    <input type = "submit" name="user_signup" class="submit" value="Sign Up"/>
                 </div>
                 <div>
-                    <small class="tandc">Already have an account? <a href="login.html">Sign in here</a></small>
+                    <small class="tandc">Already have an account? <a href="index">Sign in here</a></small>
                 </div>
                 </form>
         </div>
         </div>
     </div>
     <script src="js/backend_alert_controls.js"></script>
-    <script> var email_var = setInterval(function(){generate_alert('Sample timed alerts', 'info', 'red');}, 1000); 
-        setTimeout(function(){cancel_timed_alert('info', email_var);}, 10000);</script>
+
     <script>
 
         function firstName(){
@@ -191,5 +258,12 @@
 
 
     </script>
+    <?php
+    }
+    else{
+        echo("<script>location.href = 'dashboard';</script>");
+        header("location: dashboard");
+    }
+    ?>
 </body>
 </html>
