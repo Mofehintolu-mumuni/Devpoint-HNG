@@ -1,3 +1,35 @@
+<?php 
+session_start();
+
+include"controller_dependency.php";
+
+//instantiate controller class and select apprioprate class
+ $obj = factory::DashboardController();
+
+if(isset($_SESSION['ID'])){
+
+  $userData = $obj->GetUserDetails($_SESSION['ID']);
+
+  if($userData['STATUS'] === 'SUCCESS')
+  {
+    $firstname = $userData['DATA'][0]['FIRSTNAME'];
+    $lastname = $userData['DATA'][0]['LASTNAME'];
+    $middlename = $userData['DATA'][0]['MIDDLENAME'];
+    $email = $userData['DATA'][0]['EMAIL'];
+    $regDate = $userData['DATA'][0]['REGDATE'];
+
+    $fullname = $firstname." ".$middlename." ".$lastname;
+  }
+
+  if($userData['STATUS'] === 'FAILURE')
+  {
+   //redirect to login page
+   echo("<script>location.href = 'index';</script>");
+    header("location: index");
+  }
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -18,10 +50,11 @@
                     <div class="col-md-12 text-center align-items-center">
                         <div class="pic"><img src="https://res.cloudinary.com/dy18y8k1e/image/upload/v1568757798/Welcome_festivity_kvftvk.png"class="img"></div>
                         <h1 class="display-4 font-weight-bold mb-0 pt-md-5 pt-5 ">Welcome to <span class="txt">DevPoint HNG</span></h1>
-                        <h3 class="pt-md-5  ">Onyeme Michael</h3>
-                        <p class="pt-md-5 pt-sm-2 pt-5 pb-md-5 pb-sm-3 pb-5 ">Your email address is: onyememykel@gmail.com</p>
+                        <h3 class="pt-md-5  "><?php echo $fullname; ?></h3>
+                        <p class="pt-md-5 pt-sm-2 pt-5 pb-md-5 pb-sm-3 pb-5 ">Your email address is: <?php echo $email; ?></p>
+                        <p class="pt-md-5 pt-sm-2 pt-5 pb-md-5 pb-sm-3 pb-5 ">Your date of registration is: <?php echo $regDate; ?></p>
                         <div>
-                            <button class="btn btn-primary btn-lg" type="submit">Continue to explore DevPoint</button>
+                            <button class="btn btn-primary btn-lg" >Continue to explore DevPoint</button>
                         </div>
 
                     </div>
@@ -39,5 +72,12 @@
         
   }
   </script>
+  <?php
+    }
+    else{
+        echo("<script>location.href = 'index';</script>");
+        header("location: index");
+    }
+    ?>
   </body>
 </html>

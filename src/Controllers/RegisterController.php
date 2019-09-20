@@ -2,8 +2,8 @@
 
 
 /**
- * @author Mofehintolu MUMUNI for team Devpoint
- * @email mofehintolumumuni@gmail.com
+ * @author Mofehintolu MUMUNI
+ * 
  * @description Register controller that handles registration
  * @slack @Bits_and_Bytes
  * @copyright 2019
@@ -255,13 +255,10 @@ class RegisterController extends SqlQuery{
               {
                 $fullname = $fname." ".$middle_name." ".$last_name;
 
-            //give success message
-             echo"<script> var email_var = setInterval(function(){generate_alert('$fullname account Registration successful you can now login', 'success', 'green');}, 1000); 
-            setTimeout(function(){cancel_timed_alert('info', email_var);}, 10000);</script>";   
-                
-                    
-               
-                
+            //redirect to login page
+            echo("<script>location.href = 'index?login=true&user=$fullname';</script>");
+            header("location: index?login=true&user=$fullname");
+
               }
             else
             {

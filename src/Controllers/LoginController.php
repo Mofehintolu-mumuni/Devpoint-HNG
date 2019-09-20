@@ -6,7 +6,6 @@
  * 
  * @description Login Controller that handles login
  * @slack @Bits_and_Bytes
- * @email mofehintolumumuni@gmail.com
  * @copyright 2019
  */
 

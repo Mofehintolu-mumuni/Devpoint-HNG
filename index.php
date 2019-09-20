@@ -112,6 +112,20 @@ if(!isset($_SESSION['ID'])){
 
             }
 
+
+            //Handle registeration success
+
+            if(isset($_GET['login']) && isset($_GET['user']) && ($_GET['login'] === 'true') && ($_GET['user'] != null))
+            {
+
+                $fullname = (string) $_GET['user'];
+                
+                echo"<script> var email_var = setInterval(function(){generate_alert('$fullname your account registration was successful you can now login!', 'success', 'green');}, 1000); 
+            setTimeout(function(){cancel_timed_alert('info', email_var);}, 10000);</script>"; 
+
+            }
+
+
                 ?>
 
         <!----- END PHP CODE ----->

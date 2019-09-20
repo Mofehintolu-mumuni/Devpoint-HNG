@@ -3,8 +3,9 @@
 
 /**
  * @author Mofehintolu MUMUNI and Ogundipe Olusegun for team Devpoint
+ * 
  * @description Dashboard Controller that handles pulling user details to the frontend
- * @email mofehintolumumuni@gmail.com
+ * 
  * @slack @Bits_and_Bytes
  * @copyright 2019
  */
@@ -178,11 +179,76 @@ class DashboardController extends SqlQuery{
     *
     * */
     
-    function UserDetails($user_id)
+    function GetUserDetails($user_id)
        {
-
+        $user_id = $this->sanitize_32_character_id($user_id);
         
+        if($user_id != null)
+        {
+            $user_id = $this->sql_escape_string($user_id);
+        
+            $table_name = $this->user_table;
+            $db_column = "user_id";
+            $value_to_check = $user_id;
+            
+            $check_user_existence = $this->check_user_existence($table_name,$db_column,$value_to_check);
+            
+            if($check_user_existence === "true")
+            {
+                //get user details from database using $user_id
+                
+                $get_user_details_statement = $this->select_all_where($table_name,$db_column,$value_to_check);
+                $get_user_details_query = $this->query($get_user_details_statement);
+                
+                $user_details_array = [];
+                
+                while($row = $this->fetch_array($get_user_details_query))
+                {
+                    $first_name = $row['first_name'];
+                    $last_name = $row['last_name'];
+                    $middle_name = $row['middle_name'];
+                    $user_email = $row['user_email'];
+                    $registration_date = $row['registration_date'];
+                }
+                
+                $user_details_array[] = ['FIRSTNAME'=> $first_name,'LASTNAME'=>$last_name, 'MIDDLENAME'=>$middle_name, 'EMAIL'=>$user_email,'REGDATE'=>$registration_date];
+                
+                if(sizeof($user_details_array) === 1)
+                {
+                    return ['STATUS'=> 'SUCCESS','DATA'=> $user_details_array];
+                }
+                else
+                {
+                     if(isset($_SESSION['ID'])){
+    
+                    //destroy session and include login
+                    session_destroy();
+                        }
+                   return ['STATUS'=> 'FAILURE','DATA'=> []]; 
+                }
+            }
+            else
+                {
+                    if(isset($_SESSION['ID'])){
+    
+                    //destroy session and include login
+                    session_destroy();
+                        }
+                   return ['STATUS'=> 'FAILURE','DATA'=> []]; 
+                }
         }
+        else
+                {
+                    if(isset($_SESSION['ID'])){
+    
+                    //destroy session and include login
+                    session_destroy();
+                        }
+                   return ['STATUS'=> 'FAILURE','DATA'=> []]; 
+                }
+ 
+        
+       }
   
       
    

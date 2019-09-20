@@ -5,7 +5,6 @@
  * 
  * @description Class that contains all useful sql statements
  * @slack @Bits_and_Bytes
- * @email mofehintolumumuni@gmail.com
  * @copyright 2019
  */
 

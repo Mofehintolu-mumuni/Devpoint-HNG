@@ -2,7 +2,7 @@
 
 /**
  * @author Mofehintolu MUMUNI for team Devpoint
- * @email mofehintolumumuni@gmail.com
+ * 
  * @description Datetime class that helps provide datetime functionality
  * @slack @Bits_and_Bytes
  * @copyright 2019
