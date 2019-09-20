@@ -1,0 +1,180 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing :border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.all{
+    width:100%;
+}
+.contender{
+    width: 70%;
+    margin:10vh auto;
+    display:flex;
+    border-radius:3px;
+    box-shadow:5px 5px 20px;
+    padding:50px;
+}
+.images{
+    display: flex;
+    flex-direction:column;
+    width:50%;
+}
+.images blockquote{
+    color:grey;
+    width: 60%;
+    margin:30px auto;
+    font-weight:400;
+    opacity:0.7;
+    margin-top: 10vh;
+}
+legend{
+    text-align:right;
+    margin-top: 20px;
+}
+.second-image{
+    margin:0;
+    width:100%;
+    height:30vh;
+    margin-top: 5vh;
+}
+.form-area{
+    width:40%;
+}
+.form-area b{
+    color:blue;
+    
+}
+.form-area h2{
+    font-weight:500;
+    text-align: center;
+}
+.form-area p{
+    color:grey;
+    width:100%;
+    margin-top:1vh;
+    text-align: center;
+}
+form{
+    margin-top: 20px;
+}
+form div{
+    margin-bottom:10px;
+    display:flex;
+    flex-direction: column;
+}
+label{
+    margin-bottom:10px;
+}
+input{
+    height:6vh;
+    padding :10px;
+    border-top:1px solid grey;
+    width:25vw;
+    
+}
+.inline{
+    display: flex;
+    flex-direction: row;
+}
+.checkbox{
+    height:15px;
+    margin-right:5px;
+    width:15px;
+}
+.submit{
+    border:none;
+    background-color: rgba(25, 0, 255, 0.774);
+    color:white;
+    font-weight: 700;
+    font-size:20px;
+}
+.tandc{
+    color:grey;
+}
+.tandc a{
+    text-decoration: none;
+    font-weight:300;
+}
+/* media queries */
+@media only screen and (max-width:750px){
+
+    .contender{
+        display:flex;
+        flex-direction: column;
+        width:90%;
+        border:none;
+        box-shadow:none;
+        margin:auto;
+    }
+    blockquote{
+        display: none;
+    }
+    .second-image{
+        width:100%;
+        height:10vh;
+        margin: 10px  auto;
+    }
+    .images{
+        width:100%;
+
+    }
+    .form-area{
+        width:100%;
+    }
+    .form-area h2{
+        text-align:center;
+    }
+    input{
+        width:95%;
+        border-radius:2px;
+        box-shadow:0  0.5px gray ;
+    }
+    .submit{
+        font-size:15px;
+        padding:5px;
+    }
+    .checkbox{
+        box-shadow: none;
+    }
+    .form-area p{
+        text-align: center;
+        width: 100%;
+    }
+}
+@media only screen and (min-width:751px) and (max-width:1100px){
+        .images{
+            width:35%;
+        }
+        .images blockquote{
+            text-align:center;
+            margin-top:1vh;
+        }
+        .images legend{
+            text-align: center;
+           
+        }
+        .form-area{
+         margin-left:20px;
+         width:60%;
+        }
+        input{
+            width:90%;
+            height:4vh;
+        }
+        .form-area h2, .form-area p{
+            text-align: center;
+            width:100%;
+        }
+        .second-image{
+            width:100%;
+            height:20vh;
+        }
+        blockquote{
+            width:100%;
+        }
+        .submit{
+            font-size: 15px;
+            padding:3px;
+        }
+}
